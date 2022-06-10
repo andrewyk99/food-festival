@@ -11,6 +11,7 @@ module.exports = {
     },    
     output: {
         filename: '[name].bundle.js',
+        publicPath: "",
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
@@ -37,6 +38,13 @@ module.exports = {
             }
         ]
     },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, './')
+        },
+        compress: true,
+        port: 8080
+    },
     mode: 'development',
     plugins: [
         new webpack.ProvidePlugin({
@@ -44,7 +52,8 @@ module.exports = {
             jQuery: "jquery"
         }),
         new BundleAnalyzerPlugin({
-            analyzerMode: "static", // The report outputs to an HTML file in the dist folder
+            analyzerMode: "disable", // The report outputs to an HTML file in the dist folder
+                          // Set back to static if wan't report
         })
     ],
 };
